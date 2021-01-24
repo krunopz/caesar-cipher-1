@@ -1,3 +1,7 @@
+import art
+
+
+print(art.logo,end="\n")
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']                                                                  
 direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
@@ -9,8 +13,11 @@ text.split()
 def encrypt(text,shift):
   encrypted_text=""
   for n in text:
-      i=(alphabet.index(n)+shift)%len(alphabet)
-      encrypted_text=encrypted_text+alphabet[i]
+      if n in alphabet:
+       i=(alphabet.index(n)+shift)%len(alphabet)
+       encrypted_text=encrypted_text+alphabet[i]
+      else:
+        encrypted_text+=n
 
   print(f"The encoded text is: {encrypted_text}")
 
@@ -18,10 +25,13 @@ def encrypt(text,shift):
 def decrypt(text,shift):
   decrypted_text=""
   for n in text:
-    i=(alphabet.index(n)-shift)%len(alphabet)
-    decrypted_text=decrypted_text+alphabet[i]
+    if n in alphabet:
+       i=(alphabet.index(n)-shift)%len(alphabet)
+       decrypted_text=decrypted_text+alphabet[i]
+    else:
+      decrypted_text+=n
 
-  print(f"The decoded text is: {decrypted_text}")
+  print(f"The {direction}d text is: {decrypted_text}")
 
 if direction=="encode":
   encrypt(text,shift)
